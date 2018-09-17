@@ -1,0 +1,67 @@
+[General]
+ModuleID = ""
+FiducialMark = "Mark E (Slim/17)"
+Date_Ideal = "9/5/2018 11:47:28 AM0.000000 "
+Notes_Ideal = ""
+Date_AfterGlue = "9/5/2018 12:34:07 PM23.357964 "
+Notes_AfterGlue = "Few air bubbles in glue, smaller angle than previous mountings may have led to different placement"
+Date_BBR = "9/5/2018 3:51:10 PM23.800348 "
+Notes_BBR = "3.5 hour cure"
+Date_ABR = "9/5/2018 4:03:49 PM23.623288 "
+Notes_ABR = "3.5 hour cure"
+
+[CornerA]
+X_Ideal = 484.170215
+Y_Ideal = 18.734837
+Z_Ideal = 16.491741
+X_AfterGlue = 484.184241
+Y_AfterGlue = 18.759160
+Z_AfterGlue = 16.491692
+X_BBR = 484.183477
+Y_BBR = 18.757613
+Z_BBR = 16.491692
+X_ABR = 484.182006
+Y_ABR = 18.757336
+Z_ABR = 16.491692
+
+[CornerB]
+X_Ideal = 579.565674
+Y_Ideal = 21.148940
+Z_Ideal = 16.491741
+X_AfterGlue = 579.585775
+Y_AfterGlue = 21.149575
+Z_AfterGlue = 16.491692
+X_BBR = 579.585666
+Y_BBR = 21.149765
+Z_BBR = 16.491692
+X_ABR = 579.584675
+Y_ABR = 21.149255
+Z_ABR = 16.491692
+
+[CornerC]
+X_Ideal = 577.126172
+Y_Ideal = 117.548077
+Z_Ideal = 16.491741
+X_AfterGlue = 577.122640
+Y_AfterGlue = 117.552866
+Z_AfterGlue = 16.491692
+X_BBR = 577.123187
+Y_BBR = 117.552487
+Z_BBR = 16.491692
+X_ABR = 577.122667
+Y_ABR = 117.551167
+Z_ABR = 16.491692
+
+[CornerD]
+X_Ideal = 481.730713
+Y_Ideal = 115.133975
+Z_Ideal = 16.491741
+X_AfterGlue = 481.718401
+Y_AfterGlue = 115.161794
+Z_AfterGlue = 16.491692
+X_BBR = 481.719378
+Y_BBR = 115.159925
+Z_BBR = 16.491692
+X_ABR = 481.718887
+Y_ABR = 115.159328
+Z_ABR = 16.491692

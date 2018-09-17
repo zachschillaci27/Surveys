@@ -1,0 +1,53 @@
+[General]
+ModuleID = "Test"
+FiducialMark = "Mark E (Slim/17)"
+Date_Ideal = "9/6/2018 11:12:41 AM0.000000 "
+Notes_Ideal = ""
+Date_AfterGlue = "9/5/2018 5:43:46 PM24.154918 "
+Notes_AfterGlue = "Different calibration than module 12, stave shifted to left to stay in range of stage"
+Date_BBR = "9/6/2018 9:47:34 AM23.800348 "
+Notes_BBR = "Overnight cure"
+
+[CornerA]
+X_Ideal = 485.959490
+Y_Ideal = 18.807369
+Z_Ideal = 16.592752
+X_AfterGlue = 485.948809
+Y_AfterGlue = 18.811049
+Z_AfterGlue = 16.592710
+X_BBR = 485.952347
+Y_BBR = 18.814812
+Z_BBR = 16.592710
+
+[CornerB]
+X_Ideal = 581.354689
+Y_Ideal = 21.231726
+Z_Ideal = 16.592752
+X_AfterGlue = 581.349121
+Y_AfterGlue = 21.233531
+Z_AfterGlue = 16.592710
+X_BBR = 581.353346
+Y_BBR = 21.239856
+Z_BBR = 16.592710
+
+[CornerC]
+X_Ideal = 578.904825
+Y_Ideal = 117.630601
+Z_Ideal = 16.592752
+X_AfterGlue = 578.899188
+Y_AfterGlue = 117.635442
+Z_AfterGlue = 16.592810
+X_BBR = 578.905272
+Y_BBR = 117.641824
+Z_BBR = 16.592710
+
+[CornerD]
+X_Ideal = 483.509626    
+Y_Ideal = 115.206244    
+Z_Ideal = 16.592752    
+X_AfterGlue = 483.494517
+Y_AfterGlue = 115.212093
+Z_AfterGlue = 16.592710
+X_BBR = 483.500627
+Y_BBR = 115.215987
+Z_BBR = 16.592710

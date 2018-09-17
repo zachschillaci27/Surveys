@@ -1,0 +1,67 @@
+[General]
+ModuleID = "Test"
+FiducialMark = "Mark C"
+Date_Ideal = "7/16/2018 11:06:22 AM0.000000 "
+Notes_Ideal = ""
+Date_AG = "7/13/2018 5:01:13 PM23.977556 "
+Notes_AG = "Looking good, no problems"
+Date_BBR_WeekendCure = "7/16/2018 8:57:20 AM23.357964 "
+Notes_BBR_WeekendCure = "Using the same virtual stave map from Friday. Height somehow changed by ~1mm. Old Calibration"
+Date_ABR_WeekendCure = "7/16/2018 9:12:53 AM23.800348 "
+Notes_ABR_WeekendCure = "Everything is fine, plastic obscures camera focus"
+
+[CornerA]
+X_Ideal = -78.323513
+Y_Ideal = 19.150629
+Z_Ideal = 18.099532
+X_AG = -78.323506
+Y_AG = 19.145276
+Z_AG = 17.099782
+X_BBR_WeekendCure = -78.322157
+Y_BBR_WeekendCure = 19.139426
+Z_BBR_WeekendCure = 17.099782
+X_ABR_WeekendCure = -78.321454
+Y_ABR_WeekendCure = 19.140492
+Z_ABR_WeekendCure = 17.099782
+
+[CornerB]
+X_Ideal = 17.072078
+Y_Ideal = 21.559501
+Z_Ideal = 18.099532
+X_AG = 17.071542
+Y_AG = 21.548048
+Z_AG = 17.099782
+X_BBR_WeekendCure = 17.073739
+Y_BBR_WeekendCure = 21.544073
+Z_BBR_WeekendCure = 17.099782
+X_ABR_WeekendCure = 17.075210
+Y_ABR_WeekendCure = 21.544385
+Z_ABR_WeekendCure = 17.099782
+
+[CornerC]
+X_Ideal = 14.637861
+Y_Ideal = 117.958772
+Z_Ideal = 18.099532
+X_AG = 14.638654
+Y_AG = 117.956106
+Z_AG = 17.099782
+X_BBR_WeekendCure = 14.641500
+Y_BBR_WeekendCure = 117.951411
+Z_BBR_WeekendCure = 17.099782
+X_ABR_WeekendCure = 14.643004
+Y_ABR_WeekendCure = 117.952604
+Z_ABR_WeekendCure = 17.099782
+
+[CornerD]
+X_Ideal = -80.757730  
+Y_Ideal = 115.549900   
+Z_Ideal = 18.099532    
+X_AG = -80.759361
+Y_AG = 115.552845
+Z_AG = 17.099782
+X_BBR_WeekendCure = -80.756363
+Y_BBR_WeekendCure = 115.546686
+Z_BBR_WeekendCure = 17.099782
+X_ABR_WeekendCure = -80.754579
+Y_ABR_WeekendCure = 115.547296
+Z_ABR_WeekendCure = 17.099782

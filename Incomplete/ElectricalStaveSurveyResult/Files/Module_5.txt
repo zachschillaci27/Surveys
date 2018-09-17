@@ -1,0 +1,53 @@
+[General]
+ModuleID = ""
+FiducialMark = "Mark E (Slim/17)"
+Date_Ideal = "7/13/2018 10:27:48 AM0.000000 "
+Notes_Ideal = ""
+Date_AG = "7/12/2018 4:11:11 PM24.066218 "
+Notes_AG = "Smooth module placement!"
+Date_ABR = "7/13/2018 10:28:51 AM23.269590 "
+Notes_ABR = "We couldn't take BBR survey because the stage needed to be homed"
+
+[CornerA]
+X_Ideal = -274.327130
+Y_Ideal = 19.302256
+Z_Ideal = 17.099382
+X_AG = -274.322356
+Y_AG = 19.293145
+Z_AG = 17.099382
+X_ABR = -274.321895
+Y_ABR = 19.295804
+Z_ABR = 17.099382
+
+[CornerB]
+X_Ideal = -178.931547
+Y_Ideal = 21.711443
+Z_Ideal = 17.099382
+X_AG = -178.919597
+Y_AG = 21.680239
+Z_AG = 17.099382
+X_ABR = -178.919873
+Y_ABR = 21.686112
+Z_ABR = 17.099382
+
+[CornerC]
+X_Ideal = -181.366082
+Y_Ideal = 118.110707
+Z_Ideal = 17.099382
+X_AG = -181.370609
+Y_AG = 118.087573
+Z_AG = 17.099382
+X_ABR = -181.368094
+Y_ABR = 118.093148
+Z_ABR = 17.099482
+
+[CornerD]
+X_Ideal = -276.761665
+Y_Ideal = 115.701519
+Z_Ideal = 17.099382
+X_AG = -276.773827
+Y_AG = 115.700608
+Z_AG = 17.099382
+X_ABR = -276.771075
+Y_ABR = 115.704390
+Z_ABR = 17.099382

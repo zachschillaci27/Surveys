@@ -1,0 +1,67 @@
+[General]
+ModuleID = ""
+FiducialMark = "Mark E (Slim/17)"
+Date_Ideal = "8/30/2018 10:52:15 AM0.000000 "
+Notes_Ideal = ""
+Date_AfterGlue = "8/29/2018 4:58:18 PM23.977556 "
+Notes_AfterGlue = "Same calibration as yesterday and this morning, good placement"
+Date_BBR = "8/30/2018 10:02:14 AM23.888933 "
+Notes_BBR = "Overnight cure..."
+Date_ABR = "8/30/2018 10:53:13 AM23.357964 "
+Notes_ABR = "Overnight cure..."
+
+[CornerA]
+X_Ideal = 288.194415
+Y_Ideal = 18.883486
+Z_Ideal = 16.489251
+X_AfterGlue = 288.192767
+Y_AfterGlue = 18.880862
+Z_AfterGlue = 16.489292
+X_BBR = 288.195274
+Y_BBR = 18.882389
+Z_BBR = 16.489292
+X_ABR = 288.194947
+Y_ABR = 18.882469
+Z_ABR = 16.489292
+
+[CornerB]
+X_Ideal = 383.589996
+Y_Ideal = 21.292782
+Z_Ideal = 16.489251
+X_AfterGlue = 383.585399
+Y_AfterGlue = 21.284422
+Z_AfterGlue = 16.489292
+X_BBR = 383.587550
+Y_BBR = 21.288667
+Z_BBR = 16.489292
+X_ABR = 383.588158
+Y_ABR = 21.288570
+Z_ABR = 16.489292
+
+[CornerC]
+X_Ideal = 381.155351
+Y_Ideal = 117.692042
+Z_Ideal = 16.489251
+X_AfterGlue = 381.146956
+Y_AfterGlue = 117.689271
+Z_AfterGlue = 16.489292
+X_BBR = 381.151267
+Y_BBR = 117.693248
+Z_BBR = 16.489292
+X_ABR = 381.150896
+Y_ABR = 117.693172
+Z_ABR = 16.489292
+
+[CornerD]
+X_Ideal = 285.759770
+Y_Ideal = 115.282746
+Z_Ideal = 16.489251
+X_AfterGlue = 285.751
+Y_AfterGlue = 115.28
+Z_AfterGlue = 16.489292
+X_BBR = 285.756
+Y_BBR = 115.282
+Z_BBR = 16.489292
+X_ABR = 285.755
+Y_ABR = 115.282
+Z_ABR = 16.489292

@@ -1,0 +1,65 @@
+[General]
+ModuleID = "Test"
+FiducialMark = "Mark E (Slim/17)"
+Date_Ideal = "8/30/2018 10:52:15 AM0.000000 "
+Notes_Ideal = ""
+Date_BBR = "8/29/2018 10:34:50 AM23.534812 "
+Notes_BBR = "Type your note here...."
+Date_ABR = "8/29/2018 10:40:11 AM23.711799 "
+Notes_ABR = "Type your note here...."
+
+[CornerA]
+X_Ideal = 92.194470
+Y_Ideal = 19.030392
+Z_Ideal = 16.489251
+X_AfterGlue = 92.190454
+Y_AfterGlue = 19.043651
+Z_AfterGlue = 16.489292
+X_BBR = 92.190561
+Y_BBR = 19.047222
+Z_BBR = 16.489292
+X_ABR = 92.190471
+Y_ABR = 19.047340
+Z_ABR = 16.489292
+
+[CornerB]
+X_Ideal = 187.590051
+Y_Ideal = 21.439688
+Z_Ideal = 16.489251
+X_AfterGlue = 187.594814
+Y_AfterGlue = 21.442768
+Z_AfterGlue = 16.489292
+X_BBR = 187.592785
+Y_BBR = 21.446923
+Z_BBR = 16.489192
+X_ABR = 187.594281
+Y_ABR = 21.447379
+Z_ABR = 16.489292
+
+[CornerC]
+X_Ideal = 185.155406
+Y_Ideal = 117.838949
+Z_Ideal = 16.489251
+X_AfterGlue = 185.148874
+Y_AfterGlue = 117.843976
+Z_AfterGlue = 16.489292
+X_BBR = 185.148639
+Y_BBR = 117.848591
+Z_BBR = 16.489292
+X_ABR = 185.149331
+Y_ABR = 117.848009
+Z_ABR = 16.489292
+
+[CornerD]
+X_Ideal = 89.759825    
+Y_Ideal = 115.429653    
+Z_Ideal = 16.489251    
+X_AfterGlue = 89.746983
+Y_AfterGlue = 115.444268
+Z_AfterGlue = 16.489292
+X_BBR = 89.747089
+Y_BBR = 115.448807
+Z_BBR = 16.489292
+X_ABR = 89.747539
+Y_ABR = 115.448346
+Z_ABR = 16.489392

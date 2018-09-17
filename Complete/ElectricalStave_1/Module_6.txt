@@ -1,0 +1,69 @@
+[General]
+ModuleID = "Test"
+FiducialMark = "Mark C"
+Date_Ideal = "7/16/2018 11:06:22 AM0.000000 "
+Notes_Ideal = ""
+Date_AG = "7/13/2018 11:42:12 AM23.977556 "
+Notes_AG = "Fast placement, no problems"
+Date_BBR = "7/13/2018 3:47:18 PM23.623288 "
+Notes_BBR = "Corner D didn't match"
+Date_ABR = "7/13/2018 4:11:46 PM23.623288 "
+Notes_ABR = "Corner D didn't match"
+Date_BBR_WeekendCure = "7/16/2018 8:44:30 AM23.623288 "
+Notes_BBR_WeekendCure = "Using the same virtual stave map from Friday. Height somehow changed by ~1mm. The virtual stave height changed.  VirtualStave_Copy used"
+
+[CornerA]
+X_Ideal = -176.323485
+Y_Ideal = 19.224517
+Z_Ideal = 18.099532
+X_AG = -176.332883
+Y_AG = 19.230404
+Z_AG = 17.099882
+X_BBR = -176.337967
+Y_BBR = 19.224394
+Z_BBR = 17.099782
+X_ABR_4HrCure = -176.337792
+Y_ABR_4HrCure = 19.221712
+Z_ABR_4HrCure = 17.099782
+
+[CornerB]
+X_Ideal = -80.927894
+Y_Ideal = 21.633389
+Z_Ideal = 18.099532
+X_AG = -80.933036
+Y_AG = 21.648754
+Z_AG = 17.099782
+X_BBR = -80.936979
+Y_BBR = 21.654375
+Z_BBR = 17.099782
+X_ABR_4HrCure = -80.937236
+Y_ABR_4HrCure = 21.651240
+Z_ABR_4HrCure = 17.099782
+
+[CornerC]
+X_Ideal = -83.362111
+Y_Ideal = 118.0322661
+Z_Ideal = 18.099532
+X_AG = -83.352600
+Y_AG = 118.054063
+Z_AG = 17.099882
+X_BBR = -83.346425
+Y_BBR = 118.059728
+Z_BBR = 17.099882
+X_ABR_4HrCure = -83.346071
+Y_ABR_4HrCure = 118.057366
+Z_ABR_4HrCure = 17.099782
+
+[CornerD]
+X_Ideal = -170.129349    
+Y_Ideal = 63.831013    
+Z_Ideal = 18.099532    
+X_AG = -170.126
+Y_AG = 63.8273
+Z_AG = 17.099782
+X_BBR = -170.12
+Y_BBR = 63.8336
+Z_BBR = 17.099782
+X_ABR_4HrCure = -170.121
+Y_ABR_4HrCure = 63.8358
+Z_ABR_4HrCure = 17.099782

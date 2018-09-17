@@ -1,0 +1,67 @@
+[General]
+ModuleID = ""
+FiducialMark = "Mark E (Slim/17)"
+Date_Ideal = "7/9/2018 2:21:53 PM0.000000 "
+Notes_Ideal = ""
+Date_AG = "7/6/2018 5:00:43 PM0.000000 "
+Notes_AG = "Everything is okay with this module. Used the calibration from 07_05. So ideal coordinates might be 2/3 microns different. "
+Date_BBR_WeekendCure = "7/9/2018 9:50:38 AM0.000000 "
+Notes_BBR_WeekendCure = "Everything looks good after weekend. No major movement right on spot. No match for corner D "
+Date_ABR = "7/9/2018 2:23:19 PM23.269590 "
+Notes_ABR = "This is with the old calibration everything looks good."
+
+[CornerA]
+X_Ideal = -371.602239
+Y_Ideal = 19.948092
+Z_Ideal = 16.564292
+X_AG = -371.604642
+Y_AG = 19.938652
+Z_AG = 16.564305
+X_BBR_WeekendCure = -371.605503
+Y_BBR_WeekendCure = 19.936254
+Z_BBR_WeekendCure = 16.564305
+X_ABR = -371.607223
+Y_ABR = 19.937076
+Z_ABR = 16.564305
+
+[CornerB]
+X_Ideal = -276.207240
+Y_Ideal = 22.380299
+Z_Ideal = 16.564292
+X_AG = -276.207832
+Y_AG = 22.368086
+Z_AG = 16.564305
+X_BBR_WeekendCure = -276.208729
+Y_BBR_WeekendCure = 22.369988
+Z_BBR_WeekendCure = 16.564305
+X_ABR = -276.209678
+Y_ABR = 22.370079
+Z_ABR = 16.564205
+
+[CornerC]
+X_Ideal = -278.665037
+Y_Ideal = 118.778972
+Z_Ideal = 16.564292
+X_AG = -278.662004
+Y_AG = 118.775822
+Z_AG = 16.564305
+X_BBR_WeekendCure = -278.657768
+Y_BBR_WeekendCure = 118.776929
+Z_BBR_WeekendCure = 16.564305
+X_ABR = -278.660980
+Y_ABR = 118.777811
+Z_ABR = 16.564305
+
+[CornerD]
+X_Ideal = -374.060036
+Y_Ideal = 116.346765
+Z_Ideal = 16.564292
+X_AG = -374.060762
+Y_AG = 116.346099
+Z_AG = 16.564305
+X_BBR_WeekendCure = -374.057
+Y_BBR_WeekendCure = 116.358
+Z_BBR_WeekendCure = 16.564305
+X_ABR = -374.060184
+Y_ABR = 116.344290
+Z_ABR = 16.564305

@@ -1,0 +1,67 @@
+[General]
+ModuleID = ""
+FiducialMark = "Mark I (Slim/17)"
+Date_Ideal = "6/25/2018 9:58:33 AM0.000000 "
+Notes_Ideal = ""
+Date_AG = "6/22/2018 4:16:10 PM0.000000 "
+Notes_AG = "Too much glue, seeping out under the edges- removed some with a swab. Positioning based on Mark I and looked accurate at placement. "
+Date_BBR = "6/25/2018 9:59:26 AM0.000000 "
+Notes_BBR = "Type your note here...."
+Date_ABR = "6/25/2018 10:03:34 AM0.000000 "
+Notes_ABR = "Type your note here...."
+
+[CornerA]
+X_Ideal = -539.296183
+Y_Ideal = 20.025759
+Z_Ideal = 16.701535
+X_AG = -539.322029551
+Y_AG = 20.024826253
+Z_AG = 16.701535
+X_BBR = -539.3176021
+Y_BBR = 20.0265523
+Z_BBR = 16.701535
+X_ABR = -539.318542013
+Y_ABR = 20.024577184
+Z_ABR = 16.701535
+
+[CornerB]
+X_Ideal = -443.251590
+Y_Ideal = 22.482155
+Z_Ideal = 16.701535
+X_AG = -443.281805124
+Y_AG = 22.462253357
+Z_AG = 16.701535
+X_BBR = -443.277536682
+Y_BBR = 22.462212298
+Z_BBR = 16.701535
+X_ABR = -443.277472187
+Y_ABR = 22.460376436
+Z_ABR = 16.701535
+
+[CornerC]
+X_Ideal = -445.717036
+Y_Ideal = 118.880633
+Z_Ideal = 16.701535
+X_AG = -445.721630787
+Y_AG = 118.857135942
+Z_AG = 16.701535
+X_BBR = -445.7146561
+Y_BBR = 118.8584206
+Z_BBR = 16.701535
+X_ABR = -445.714878635
+Y_ABR = 118.856705011
+Z_ABR = 16.701535
+
+[CornerD]
+X_Ideal = -541.761629
+Y_Ideal = 116.424237
+Z_Ideal = 16.701535
+X_AG = -541.764
+Y_AG = 116.422
+Z_AG = 16.701529
+X_BBR = -541.757729512
+Y_BBR = 116.424916224
+Z_BBR = 16.701535
+X_ABR = -541.75761931
+Y_ABR = 116.42213367
+Z_ABR = 16.701535

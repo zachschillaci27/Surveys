@@ -1,0 +1,71 @@
+[General]
+ModuleID = "Test"
+FiducialMark = "Mark E (Slim/17)"
+Date_Ideal = "7/9/2018 2:21:53 PM0.000000 "
+Notes_Ideal = ""
+Date_ = "7/6/2018 9:50:26 AM0.000000 "
+Notes_ = "Type your note here...."
+Date_AG = "7/5/2018 5:16:45 PM0.000000 "
+Notes_AG = "The glue seemed continuous in the end i.e more like a S pattern. Gerrit had to remove the glue off from the mid Kapton spacer. "
+Date_BBR = "7/6/2018 3:24:32 PM0.000000 "
+Notes_BBR = "Same calibration from the day before"
+Date_ABR = "7/6/2018 3:37:13 PM0.000000 "
+Notes_ABR = "Using same calibration as day before, after bridge removal"
+
+
+[CornerA]
+X_Ideal = -469.602226
+Y_Ideal = 19.998008
+Z_Ideal = 16.564292
+X_AG = -469.607362
+Y_AG = 19.999425
+Z_AG = 16.564305
+X_BBR = -469.607206
+Y_BBR = 19.998756
+Z_BBR = 16.564305
+X_ABR = -469.607016
+Y_ABR = 19.999942
+Z_ABR = 16.564305
+
+[CornerB]
+X_Ideal = -374.207227
+Y_Ideal = 22.430215
+Z_Ideal = 16.564292
+X_AG = -374.215494
+Y_AG = 22.430358
+Z_AG = 16.564305
+X_BBR = -374.215055
+Y_BBR = 22.434214
+Z_BBR = 16.564305
+X_ABR = -374.214017
+Y_ABR = 22.434586
+Z_ABR = 16.564305
+
+[CornerC]
+X_Ideal = -376.665024
+Y_Ideal = 118.828888
+Z_Ideal = 16.564292
+X_AG = -376.669755
+Y_AG = 118.838523
+Z_AG = 16.564405
+X_BBR = -376.664934
+Y_BBR = 118.841914
+Z_BBR = 16.564305
+X_ABR = -376.664940
+Y_ABR = 118.843130
+Z_ABR = 16.564305
+
+
+[CornerD]
+X_Ideal = -472.060023    
+Y_Ideal = 116.396681    
+Z_Ideal = 16.564292    
+X_AG = -472.061194
+Y_AG = 116.408668
+Z_AG = 16.564305
+X_BBR = -472.055287
+Y_BBR = 116.407775
+Z_BBR = 16.564405
+X_ABR = -472.055802
+Y_ABR = 116.408352
+Z_ABR = 16.564405
