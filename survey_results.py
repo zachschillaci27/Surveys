@@ -116,7 +116,7 @@ class TheSurveys(object):
                     if (reference == 'relative'):
                         origin = self.results[self.stages[0]][corner][xyz]
                         scale = 1000
-                        units = '[um]'
+                        units = '[$\mu$m]'
                     diff = scale * (self.results[stage][corner][xyz] - origin)
                     values.append(diff)
 
@@ -182,16 +182,16 @@ for dim in all_placements:
     fig = plt.figure("Histogram - " + dim,(10,10))
     ax = fig.add_subplot(111)
 
-    bins = np.arange(-30, 30, 5.0)
+    bins = np.arange(-30, 35, 5.0)
     width  = round(abs(bins[0] - bins[1]),2)
 
     plt.hist(all_placements[dim], bins=bins)
-    plt.xlabel('$\Delta$' + dim + ' [um]', fontsize=18)
-    plt.ylabel('Counts / ' + str(width) + ' um', fontsize=18)
+    plt.xlabel('$\Delta$' + dim + ' [$\mu$m]', fontsize=18)
+    plt.ylabel('Counts / ' + str(width) + ' $\mu$m', fontsize=18)
     plt.xlim(bins[0] - width, bins[-1] + width)
     plt.ylim(0,12.5)
 
     sigma = round(np.std(all_placements[dim]),2)
-    ax.annotate('$\sigma$ = ' + str(sigma) + ' um',xy=(0.995,0.965),xycoords='axes fraction',fontsize=16,horizontalalignment='right',verticalalignment='bottom')
+    ax.annotate('$\sigma$ = ' + str(sigma) + ' $\mu$m',xy=(0.995,0.965),xycoords='axes fraction',fontsize=16,horizontalalignment='right',verticalalignment='bottom')
     plt.savefig(folder + dim + '-histogram.pdf')
     plt.close()
