@@ -102,10 +102,9 @@ class TheSurveys(object):
         return results
 
     def PlotXYZMovement(self, reference='relative', printOut=True, save=True):
-        dims = ['X', 'Y']
-
+        self.dframes = {}
         plt.figure("Movement - " + reference,(10,10))
-        for xyz, dim in enumerate(dims):
+        for xyz, dim in enumerate(['X', 'Y']):
             plt.subplot(211 + xyz)
             dframe = collections.OrderedDict()
             for corner in self.corners.keys():
@@ -127,6 +126,8 @@ class TheSurveys(object):
                 plt.plot(np.arange(0, len(values)), values, linestyle='--', marker='o', label=corner)
                 dframe[corner] = values
 
+            self.dframes[dim] = dframe
+
             if printOut:
                 print('-----' + dim + ' ' + units + '-----')
                 df = pd.DataFrame(dframe, index=self.stages)
@@ -144,16 +145,15 @@ class TheSurveys(object):
         plt.close()
 
     def DidItPass(self):
-        dims = ['X', 'Y']
         passed = True
         failures = []
-        for xyz, dim in enumerate(dims):
+        for xyz, dim in enumerate(['X', 'Y']):
             for corner in self.corners.keys():
                 for stage in self.stages:
                     movement = 1000 * (self.results[stage][corner][xyz] - self.results[self.stages[0]][corner][xyz])
                     if (abs(movement) >= self.tolerance):
                         passed = False
-                        if (stage == 'ABR'):
+                        if (stage == self.stages[-1]):
                             failures.append(corner + ' - ' + stage + ': delta' + dim + ' = ' + str(movement) + ' um')
         return passed, failures
 
