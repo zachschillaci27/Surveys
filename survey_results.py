@@ -121,7 +121,8 @@ class TheSurveys(object):
                     values.append(diff)
 
                     if (stage == self.stages[-1]):
-                        all_placements[dim].append(diff)
+                        if (corner in thePair):
+                            all_placements[dim].append(diff)
 
                 plt.plot(np.arange(0, len(values)), values, linestyle='--', marker='o', label=corner)
                 dframe[corner] = values
@@ -166,32 +167,47 @@ class TheSurveys(object):
                 print(failure)
         print('-----------------------------------------------------------------' + '\n')
 
-global all_placements
-all_placements = {'X' : [], 'Y' : []}
+pair_of_corners = [['A','B'], ['C','D'], ['A','C'], ['A','D'], ['B','C'], ['B','D'], ['A','B','C','D']]
+for pair in pair_of_corners:
+    global thePair
+    thePair = pair
 
-folder = "/Users/zschillaci/BNL/Working/StaveAssembly/Surveys/Complete/ElectricalStave_1/"
-sys.stdout = open(folder + 'output.txt',"w")
-for module in np.arange(2,14):
-    survey = TheSurveys(module, folder)
+    global all_placements
+    all_placements = {'X' : [], 'Y' : []}
 
-    print(survey.name)
-    survey.PlotXYZMovement(reference='relative', save=True, printOut=True)
-    survey.PrintTheFailures()
+    corners = ''
+    for theCorner in thePair:
+        corners += theCorner
 
-for dim in all_placements:
-    fig = plt.figure("Histogram - " + dim,(10,10))
-    ax = fig.add_subplot(111)
+    folder = "/Users/zschillaci/BNL/Working/StaveAssembly/Surveys/Complete/ElectricalStave_1/"
+    sys.stdout = open(folder + 'output.txt',"w")
+    for module in np.arange(2,14):
+        survey = TheSurveys(module, folder)
 
-    bins = np.arange(-30, 35, 5.0)
-    width  = round(abs(bins[0] - bins[1]),2)
+        print(survey.name)
+        survey.PlotXYZMovement(reference='relative', save=True, printOut=True)
+        survey.PrintTheFailures()
 
-    plt.hist(all_placements[dim], bins=bins)
-    plt.xlabel('$\Delta$' + dim + ' [$\mu$m]', fontsize=18)
-    plt.ylabel('Counts / ' + str(width) + ' $\mu$m', fontsize=18)
-    plt.xlim(bins[0] - width, bins[-1] + width)
-    plt.ylim(0,12.5)
+    for dim in all_placements:
+        fig = plt.figure("Histogram - " + dim,(10,10))
+        ax = fig.add_subplot(111)
 
-    sigma = round(np.std(all_placements[dim]),2)
-    ax.annotate('$\sigma$ = ' + str(sigma) + ' $\mu$m',xy=(0.995,0.965),xycoords='axes fraction',fontsize=16,horizontalalignment='right',verticalalignment='bottom')
-    plt.savefig(folder + dim + '-histogram.pdf')
-    plt.close()
+        bins = np.arange(-30, 35, 7.5)
+        width  = round(abs(bins[0] - bins[1]),2)
+
+        plt.hist(all_placements[dim], bins=bins)
+        plt.xlabel('$\Delta$' + dim + ' [$\mu$m]', fontsize=18)
+        plt.ylabel('Counts / ' + str(width) + ' $\mu$m', fontsize=18)
+        plt.xlim(-52.5, 52.5)
+        plt.xticks(np.arange(-50,55,10))
+        plt.ylim(0,10.5)
+
+        if (corners == 'ABCD'):
+            plt.ylim(0,15.5)
+
+        mean = round(np.mean(all_placements[dim]),2)
+        sigma = round(np.std(all_placements[dim]),2)
+        ax.annotate('$\mu$ = ' + str(mean) + ' $\mu$m',xy=(0.995,0.965),xycoords='axes fraction',fontsize=16,horizontalalignment='right',verticalalignment='bottom')
+        ax.annotate('$\sigma$ = ' + str(sigma) + ' $\mu$m',xy=(0.995,0.925),xycoords='axes fraction',fontsize=16,horizontalalignment='right',verticalalignment='bottom')
+        plt.savefig(folder + dim + '-Corners' + corners + '-histogram.pdf')
+        plt.close()
