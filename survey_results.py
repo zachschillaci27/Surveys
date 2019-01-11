@@ -138,7 +138,7 @@ class TheSurveys(object):
             plt.xlabel('Stage in Process')
             plt.xticks(np.arange(0, len(self.stages)), self.stages)
             plt.ylabel(dim + ' ' + units)
-            plt.legend()
+            plt.legend(loc=9,ncol=4)
         if save:
             plt.savefig(self.dir + self.name + '-' + reference + '.pdf')
         else:
@@ -179,9 +179,9 @@ for pair in pair_of_corners:
     for theCorner in thePair:
         corners += theCorner
 
-    folder = "/Users/zschillaci/BNL/Working/StaveAssembly/Surveys/Complete/ElectricalStave_1/"
+    folder = "/Users/zschillaci/BNL/Working/InnerTracker/Assembly/Surveys/Complete/ElectricalStave_8/"
     sys.stdout = open(folder + 'output.txt',"w")
-    for module in np.arange(2,14):
+    for module in [1]:
         survey = TheSurveys(module, folder)
 
         print(survey.name)
