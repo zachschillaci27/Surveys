@@ -2,7 +2,7 @@ Module_1
 -----X [$\mu$m]-----
                            A      B      C      D
 Ideal                  0.000  0.000  0.000  0.000
-After gluing           8.314  8.246  5.486  2.207
+After gluing             NaN  8.246  5.486  2.207
 Before bridge removal  1.259  3.827 -0.086 -1.670
 After bridge removal   6.849  9.538  9.389  3.983
 --------------------
@@ -10,7 +10,7 @@ After bridge removal   6.849  9.538  9.389  3.983
 -----Y [$\mu$m]-----
                             A       B       C       D
 Ideal                   0.000   0.000   0.000   0.000
-After gluing            5.038  -5.123   2.925   4.838
+After gluing              NaN  -5.123   2.925   4.838
 Before bridge removal  -4.546  -5.828   2.727   4.165
 After bridge removal   14.805  16.063  23.546  23.678
 --------------------

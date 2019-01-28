@@ -135,6 +135,9 @@ class TheSurveys(object):
                 print(df)
                 print('--------------------' + '\n')
 
+
+            plt.ylim(-25.5, 25.5)
+
             plt.xlabel('Stage in Process')
             plt.xticks(np.arange(0, len(self.stages)), self.stages)
             plt.ylabel(dim + ' ' + units)
