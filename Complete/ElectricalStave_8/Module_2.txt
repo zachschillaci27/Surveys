@@ -1,0 +1,41 @@
+[General]
+ModuleID = ""
+FiducialMark = "Mark E (Slim/17)"
+Date_Ideal = "1/24/2019 3:35:25 PM0.000000 "
+Notes_Ideal = ""
+Date_After glue = "1/24/2019 1:13:13 PM24.066218 "
+Notes_After glue = "Slightly off rotation, otherwise good placement"
+Date_After glue, again = "1/24/2019 3:40:06 PM23.800348 "
+Notes_After glue, again = "Slightly off rotation, otherwise good placement"
+
+[CornerA]
+X_Ideal = 495.310488
+Y_Ideal = -33.032625
+Z_Ideal = 16.217782
+X_After glue = 495.331771
+Y_After glue = -33.038900
+Z_After glue = 16.217644
+
+[CornerB]
+X_Ideal = 590.702821
+Y_Ideal = -30.498018
+Z_Ideal = 16.217782
+X_After glue = 590.726901
+Y_After glue = -30.517617
+Z_After glue = 16.217744
+
+[CornerC]
+X_Ideal = 588.141547
+Y_Ideal = 65.897961
+Z_Ideal = 16.217782
+X_After glue = 588.151325
+Y_After glue = 65.885875
+Z_After glue = 16.217744
+
+[CornerD]
+X_Ideal = 492.749214
+Y_Ideal = 63.363354
+Z_Ideal = 16.217782
+X_After glue = 492.755717
+Y_After glue = 63.363547
+Z_After glue = 16.217744
