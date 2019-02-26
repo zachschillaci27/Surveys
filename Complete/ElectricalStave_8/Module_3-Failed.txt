@@ -1,0 +1,53 @@
+[General]
+ModuleID = ""
+FiducialMark = "Mark E (Slim/17)"
+Date_Ideal = "2/15/2019 10:26:28 AM0.000000 "
+Notes_Ideal = ""
+Date_After glue = "2/14/2019 4:26:33 PM23.977556 "
+Notes_After glue = "Type your note here...."
+Date_Before bridge removal = "2/15/2019 10:30:55 AM23.092942 "
+Notes_Before bridge removal = "too much glue leakage off the side"
+
+[CornerA]
+X_Ideal = 397.428187
+Y_Ideal = -33.224160
+Z_Ideal = 16.273467
+X_After glue = 397.4147953
+Y_After glue = -33.22583396
+Z_After glue = 16.273354
+X_Before bridge removal = 397.413
+Y_Before bridge removal = -33.2184
+Z_Before bridge removal = 16.273454
+
+[CornerB]
+X_Ideal = 492.823484
+Y_Ideal = -30.803637
+Z_Ideal = 16.273467
+X_After glue = 492.8184621
+Y_After glue = -30.79861513
+Z_After glue = 16.273454
+X_Before bridge removal = 492.819142
+Y_Before bridge removal = nan
+Z_Before bridge removal = 16.273454
+
+[CornerC]
+X_Ideal = 490.377494
+Y_Ideal = 65.595336
+Z_Ideal = 16.273467
+X_After glue = 490.367554
+Y_After glue = 65.593905
+Z_After glue = 16.273454
+X_Before bridge removal = 490.365011
+Y_Before bridge removal = 65.599962
+Z_Before bridge removal = 16.273454
+
+[CornerD]
+X_Ideal = 394.982198
+Y_Ideal = 63.174813
+Z_Ideal = 16.273467
+X_After glue = 394.962431
+Y_After glue = 63.180115
+Z_After glue = 16.273454
+X_Before bridge removal = 394.962435    
+Y_Before bridge removal = 63.187714    
+Z_Before bridge removal = 16.273454    

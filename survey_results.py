@@ -184,7 +184,7 @@ for pair in pair_of_corners:
 
     folder = "/Users/zschillaci/BNL/Working/InnerTracker/Surveys/Complete/ElectricalStave_8/"
     sys.stdout = open(folder + 'output.txt',"w")
-    for module in [1,2]:
+    for module in [1,2,3]:
         survey = TheSurveys(module, folder)
 
         print(survey.name)
