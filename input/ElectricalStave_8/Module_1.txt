@@ -1,0 +1,67 @@
+[General]
+ModuleID = ""
+FiducialMark = "Mark E (Slim/17)"
+Date_Ideal = "1/11/2019 10:15:37 AM0.000000 "
+Notes_Ideal = ""
+Date_After gluing = "1/10/2019 3:29:56 PM23.800348 "
+Notes_After gluing = "Good placement, inverted gluing w/ opposite stereo angle. Corner A didn't match."
+Date_Before bridge removal = "1/11/2019 10:17:37 AM22.828204 "
+Notes_Before bridge removal = "Overnight glue curing."
+Date_After bridge removal = "1/11/2019 10:20:44 AM23.181250 "
+Notes_After bridge removal = "Overnight glue curing. Looks good!"
+
+[CornerA]
+X_Ideal = 496.937686
+Y_Ideal = -33.214138
+Z_Ideal = 16.000000
+X_After gluing = nan
+Y_After gluing = nan
+Z_After gluing = 16.000006
+X_Before bridge removal = 496.938945
+Y_Before bridge removal = -33.218684
+Z_Before bridge removal = 16.000006
+X_After bridge removal = 496.944535
+Y_After bridge removal = -33.199333
+Z_After bridge removal = 16.000006
+
+[CornerB]
+X_Ideal = 592.330100
+Y_Ideal = -30.682577
+Z_Ideal = 16.000000
+X_After gluing = 592.338346
+Y_After gluing = -30.687700
+Z_After gluing = 16.000006
+X_Before bridge removal = 592.333927
+Y_Before bridge removal = -30.688405
+Z_Before bridge removal = 16.000006
+X_After bridge removal = 592.339638
+Y_After bridge removal = -30.666514
+Z_After bridge removal = 16.000006
+
+[CornerC]
+X_Ideal = 589.771904
+Y_Ideal = 65.713483
+Z_Ideal = 16.000000
+X_After gluing = 589.777390
+Y_After gluing = 65.716408
+Z_After gluing = 16.000006
+X_Before bridge removal = 589.771818
+Y_Before bridge removal = 65.716210
+Z_Before bridge removal = 16.000006
+X_After bridge removal = 589.781293
+Y_After bridge removal = 65.737029
+Z_After bridge removal = 16.000006
+
+[CornerD]
+X_Ideal = 494.379490
+Y_Ideal = 63.181923
+Z_Ideal = 16.000000
+X_After gluing = 494.381697
+Y_After gluing = 63.186761
+Z_After gluing = 16.000006
+X_Before bridge removal = 494.377820
+Y_Before bridge removal = 63.186088
+Z_Before bridge removal = 16.000006
+X_After bridge removal = 494.383473
+Y_After bridge removal = 63.205601
+Z_After bridge removal = 16.000006
