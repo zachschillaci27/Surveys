@@ -7,7 +7,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime
-from mpl_toolkits.mplot3d import Axes3D
 
 def mkdir(path):
     if not os.path.isdir(path):
@@ -50,7 +49,7 @@ def RenameStages(stages):
         output.append(stage)
     return output
 
-class TheSurveys(object):
+class TheSurvey(object):
     def __init__(self, module, stave, indir):
         self.module = module
         self.stave = stave
@@ -69,7 +68,7 @@ class TheSurveys(object):
         print('Module:', self.module)
         print('Stave:', self.stave)
         print('File:', self.infile)
-        print('-----')
+        print('')
 
     def GetLines(self):
         infile = open(self.infile,"r")
@@ -137,19 +136,19 @@ class TheSurveys(object):
             for corner in self.corners.keys():
                 values = []
                 for stage in self.stages:
-                    value, units = None, None
+                    value = None
                     if (reference == 'relative'):
                         value = self.GetRelative(stage, corner, xyz)
-                        units = '[$\mu$m]'
                     else:
                         value = self.GetAbsolute(stage, corner, xyz)
-                        units = '[mm]'
                     values.append(value)
 
                 plt.plot(np.arange(0, len(values)), values, linestyle='--', marker='o', label=corner)
                 dframe[corner] = values
 
             self.dframes[dim] = dframe
+
+            units = ('[$\mu$m]' if (reference == 'relative') else ['mm'])
 
             if printOut:
                 print('-----' + dim + ' ' + units + '-----')
@@ -210,22 +209,32 @@ def PlotHistogram(placements, corners, stave):
         ax.annotate('$\sigma$ = ' + str(sigma) + ' $\mu$m',xy=(0.995,0.925),xycoords='axes fraction',fontsize=16,horizontalalignment='right',verticalalignment='bottom')
         SavePlot(RESULTS_DIR + '/' + stave, dim + '-Corners' + corners + '-histogram.pdf')
 
+# PARAMETERS #
+
+# Input and output directories
 INPUT_DIR = '/Users/zschillaci/BNL/Working/InnerTracker/Surveys/input/'
 RESULTS_DIR = '/Users/zschillaci/BNL/Working/InnerTracker/Surveys/results/'
-STAVE = 'ElectricalStave_7'
 
-theCorners = ['ABCD']
-# theCorners = ['AB', 'CD', 'AC', 'AD', 'BC', 'BD', 'ABCD']
-for corners in theCorners:
-    
+# Stave name (matching a sub-directory in INPUT_DIR)
+STAVE = 'ElectricalStave_8'
+# List of module numbers on the stave (corresponding to survey files in STAVE sub-directory)
+MODULES = [1, 2, 3]
+
+# Plot and printout all survey results, highlighting any failures (placements outside tolerance)
+for module in MODULES:
+    survey = TheSurvey(module, STAVE, INPUT_DIR)
+    survey.Dump()
+
+    survey.PlotXYZMovement(reference='relative', printOut=True)
+    survey.PrintTheFailures()
+
+# Plot placement histograms of all modules for specified corners
+for corners in ['AB', 'CD', 'AC', 'AD', 'BC', 'BD', 'ABCD']:
+
     placements = {'X' : [], 'Y' : []}
 
-    for module in np.arange(2, 13):
-        survey = TheSurveys(module, STAVE, INPUT_DIR)
-        survey.Dump()
-
-        survey.PlotXYZMovement(reference='relative', printOut=True)
+    for module in MODULES:
+        survey = TheSurvey(module, STAVE, INPUT_DIR)
         survey.PopulateHistograms(placements, survey.stages[-1], corners)
-        survey.PrintTheFailures()
 
     PlotHistogram(placements, corners, STAVE)
