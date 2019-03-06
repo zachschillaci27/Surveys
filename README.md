@@ -4,20 +4,4 @@ Surveys is a Python package for analyzing the placement precision of module load
 
 ## Usage
 
-Developed for python3.5, requires additional packages. Create a basic survey results script:
-
-```
-from methods import *
-
-INPUT_DIR = './input/'
-RESULTS_DIR = './results/'
-STAVE = 'StaveName'
-
-#Plot survey results for Module_1
-survey = TheSurveys(1, STAVE, INPUT_DIR)
-survey.Dump()
-
-survey.PlotXYZMovement(reference='relative', printOut=True)
-survey.PrintTheFailures()
-
-```
+Developed for python3.5, requires additional packages.
