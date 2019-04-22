@@ -156,13 +156,13 @@ class TheSurvey(object):
                 print(df)
                 print('--------------------' + '\n')
 
-            plt.ylim(-25.5, 25.5)
+            plt.ylim(-75.5, 75.5)
             plt.xlabel('Stage in Process')
             plt.xticks(np.arange(0, len(self.stages)), self.stages)
             plt.ylabel(dim + ' ' + units)
             plt.legend(loc=9, ncol=4)
         SavePlot(RESULTS_DIR + '/' + self.stave, self.name + '-' + reference + '.pdf')
-       
+
     def DidItPass(self):
         passed = True
         failures = []
@@ -218,7 +218,7 @@ RESULTS_DIR = '/Users/zschillaci/BNL/Working/InnerTracker/Surveys/results/'
 # Stave name (matching a sub-directory in INPUT_DIR)
 STAVE = 'ElectricalStave_8'
 # List of module numbers on the stave (corresponding to survey files in STAVE sub-directory)
-MODULES = [1, 2, 3]
+MODULES = [1, 2, 3, 4]
 
 # Plot and printout all survey results, highlighting any failures (placements outside tolerance)
 for module in MODULES:

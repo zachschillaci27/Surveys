@@ -1,0 +1,39 @@
+[General]
+ModuleID = ""
+FiducialMark = "Mark E (Slim/17)"
+Date_Ideal = "4/19/2019 3:07:14 PM, Temperature =  "
+Notes_Ideal = "Stave: lifeisalie, Tape type: Stereo (Sutcliffe Stave Core 8)"
+Date_Recalibration = "4/19/2019 3:09:43 PM, Temperature =  "
+Notes_Recalibration = "Stave appears to have moved in previous surveys"
+
+[CornerA]
+X_Ideal = 301.440717
+Y_Ideal = -32.982759
+Z_Ideal = 16.281705
+X_Recalibration = 301.462742
+Y_Recalibration = -32.973269
+Z_Recalibration = 16.281655
+
+[CornerB]
+X_Ideal = 396.835971
+Y_Ideal = -30.560566
+Z_Ideal = 16.281705
+X_Recalibration = 396.848746
+Y_Recalibration = -30.535324
+Z_Recalibration = 16.281655
+
+[CornerC]
+X_Ideal = 394.388293
+Y_Ideal = 65.838364
+Z_Ideal = 16.281705
+X_Recalibration = 394.377642
+Y_Recalibration = 65.852966
+Z_Recalibration = 16.281655
+
+[CornerD]
+X_Ideal = 298.993039
+Y_Ideal = 63.416171
+Z_Ideal = 16.281705
+X_Recalibration = 298.987411
+Y_Recalibration = 63.410071
+Z_Recalibration = 16.281655
