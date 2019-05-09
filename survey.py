@@ -3,6 +3,7 @@ import os
 import sys
 import glob
 import collections
+import math as mt
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -11,6 +12,9 @@ from datetime import datetime
 def mkdir(path):
     if not os.path.isdir(path):
         os.makedirs(path)
+
+def sround(val, floating=2):
+    return str(round(val, floating))
 
 def SavePlot(path, fname):
     mkdir(path)
@@ -37,6 +41,7 @@ def StringtoFlt(string):
 def RenameStages(stages):
     output = []
     for stage in stages:
+        stage = stage.replace(' ', '')
         stage = stage.lower()
         if ('aftergluing' in stage) or ('afterglue' in stage) or ('ag' in stage):
             stage = 'AG'
@@ -51,6 +56,7 @@ def RenameStages(stages):
 
 class TheSurvey(object):
     def __init__(self, module, stave, indir):
+        #Meta-data
         self.module = module
         self.stave = stave
         self.indir = indir
@@ -58,11 +64,14 @@ class TheSurvey(object):
         self.infile = self.indir + '/' + self.stave + '/' + self.name + '.txt'
         self.dimensions = ['X', 'Y']
         self.tolerance = 25
-        self.lines = self.GetLines()
-        self.corners = self.SeparateByCorner()
-        self.stages = self.GetStages()
-        self.results = self.GetResults()
-        self.passed, self.failures = self.DidItPass()
+       
+        #Data
+        self.GetLines()
+        self.GetCorners()
+        self.GetStages()
+        self.GetResults()
+        self.GetAngles()
+        self.GetFlags()
 
     def Dump(self):
         print('Module:', self.module)
@@ -72,11 +81,10 @@ class TheSurvey(object):
 
     def GetLines(self):
         infile = open(self.infile,"r")
-        lines = infile.readlines()
+        self.lines = infile.readlines()
         infile.close()
-        return lines
 
-    def SeparateByCorner(self):
+    def GetCorners(self):
         indA, indB, indC, indD = 0, 0, 0, 0
         for ind, line in enumerate(self.lines):
             if ("CornerA" in line):
@@ -88,38 +96,75 @@ class TheSurvey(object):
             elif ("CornerD" in line):
                 indD = ind + 1
 
-        corners = collections.OrderedDict()
-        corners['A'] = self.lines[indA : indB - 2]
-        corners['B'] = self.lines[indB : indC - 2]
-        corners['C'] = self.lines[indC : indD - 2]
-        corners['D'] = self.lines[indD : ]
-        return corners
+        self.corners = collections.OrderedDict()
+        self.corners['A'] = self.lines[indA : indB - 2]
+        self.corners['B'] = self.lines[indB : indC - 2]
+        self.corners['C'] = self.lines[indC : indD - 2]
+        self.corners['D'] = self.lines[indD : ]
 
     def GetStages(self):
-        stages = []
+        self.stages = []
         for line in self.corners['A']:
             stage = line[line.find("_") + 1: line.find("=") - 1]
-            if (stage not in stages):
-                stages.append(stage)
-        stages = RenameStages(stages)
-        return stages
-
-    def GetResults(self):
-        results = collections.OrderedDict()
-        for ind, stage in enumerate(self.stages):
-            results[stage] = collections.OrderedDict()
-            for corner in self.corners.keys():
-                results[stage][corner] = []
-                for xyz in range(3):
-                    pos = StringtoFlt(self.corners[corner][(3 * ind) + xyz])
-                    results[stage][corner].append(pos)
-        return results
+            if (stage not in self.stages):
+                self.stages.append(stage)
+        # self.stages = RenameStages(self.stages)
+        return self.stages
 
     def GetAbsolute(self, stage, corner, xyz):
         return (self.results[stage][corner][xyz])
 
     def GetRelative(self, stage, corner, xyz):
         return (1000 * (self.results[stage][corner][xyz] - self.results[self.stages[0]][corner][xyz]))
+
+    def GetResults(self):
+        self.results = collections.OrderedDict()
+        for ind, stage in enumerate(self.stages):
+            self.results[stage] = collections.OrderedDict()
+            for corner in self.corners.keys():
+                self.results[stage][corner] = []
+                for xyz in range(3):
+                    pos = StringtoFlt(self.corners[corner][(3 * ind) + xyz])
+                    self.results[stage][corner].append(pos)
+
+    def GetAngle(self, stage, corners):
+        c1, c2 = corners
+        dx = self.results[stage][c1][0] - self.results[stage][c2][0]
+        dy = self.results[stage][c1][1] - self.results[stage][c2][1]
+        try:
+            angle = 1000 * mt.atan(dy / dx)
+        except:
+            return -999
+        return angle
+
+    def GetAngles(self):
+        self.angles = collections.OrderedDict()
+        self.theAngles = ['AB', 'CD']
+        for stage in self.stages:
+            self.angles[stage] = collections.OrderedDict()
+            for theAngle in self.theAngles:
+                self.angles[stage][theAngle] = self.GetAngle(stage, theAngle)
+
+    def GetFlags(self):
+        self.passed = True
+        self.failures = []
+        for xyz, dim in enumerate(self.dimensions):
+            for corner in self.corners.keys():
+                for stage in self.stages:
+                    movement = self.GetRelative(stage, corner, xyz)
+                    if (abs(movement) >= self.tolerance):
+                        self.passed = False
+                        if (stage == self.stages[-1]):
+                            self.failures.append(corner + ' - ' + stage + ': delta' + dim + ' = ' + sround(movement) + ' um')
+
+    def PrintOverview(self):
+        if self.passed:
+            print("---> Passed! All surveys within " + sround(self.tolerance) + " um tolerance.")
+        else:
+            print("---> Failed! The following corners are out of " + sround(self.tolerance) + " um tolerance: ")
+            for failure in self.failures:
+                print(failure)
+        print('-----------------------------------------------------------------' + '\n')
 
     def PopulateHistograms(self, placements, stage, corners='ABCD'):
         for xyz, dim in enumerate(self.dimensions):
@@ -161,29 +206,31 @@ class TheSurvey(object):
             plt.xticks(np.arange(0, len(self.stages)), self.stages)
             plt.ylabel(dim + ' ' + units)
             plt.legend(loc=9, ncol=4)
-        SavePlot(RESULTS_DIR + '/' + self.stave, self.name + '-' + reference + '.pdf')
+        SavePlot(RESULTS_DIR + '/' + self.stave, 'position-' + reference + '-' + self.name + '.pdf')
 
-    def DidItPass(self):
-        passed = True
-        failures = []
-        for xyz, dim in enumerate(self.dimensions):
-            for corner in self.corners.keys():
-                for stage in self.stages:
-                    movement = self.GetRelative(stage, corner, xyz)
-                    if (abs(movement) >= self.tolerance):
-                        passed = False
-                        if (stage == self.stages[-1]):
-                            failures.append(corner + ' - ' + stage + ': delta' + dim + ' = ' + str(movement) + ' um')
-        return passed, failures
+    def PlotAngle(self, printOut=True):
+        plt.figure("Angle Movement", (10, 10))
+        dframe = collections.OrderedDict()
+        for theAngle in self.theAngles:
+            values = []
+            for stage in self.stages:
+                values.append(self.angles[stage][theAngle])
 
-    def PrintTheFailures(self):
-        if self.passed:
-            print("---> Passed! All surveys within " + str(self.tolerance) + " um tolerance.")
-        else:
-            print("---> Failed! The following corners are out of " + str(self.tolerance) + " um tolerance: ")
-            for failure in self.failures:
-                print(failure)
-        print('-----------------------------------------------------------------' + '\n')
+            plt.plot(np.arange(0, len(values)), values, linestyle='--', marker='o', label=theAngle)
+            dframe[theAngle] = values
+
+        if printOut:
+            print('----- Angle [mrad] -----')
+            df = pd.DataFrame(dframe, index=self.stages)
+            print(df)
+            print('--------------------' + '\n')
+
+        plt.ylim(25, 27)
+        plt.xlabel('Stage in Process')
+        plt.xticks(np.arange(0, len(self.stages)), self.stages)
+        plt.ylabel('Angle [mrad]')
+        plt.legend(loc=9, ncol=4)
+        SavePlot(RESULTS_DIR + '/' + self.stave, 'angle-' + self.name + '.pdf')
 
 def PlotHistogram(placements, corners, stave):
     for dim in placements:
@@ -191,11 +238,9 @@ def PlotHistogram(placements, corners, stave):
         ax = fig.add_subplot(111)
 
         bins = np.arange(-30, 35, 7.5)
-        width  = round(abs(bins[0] - bins[1]),2)
-
         plt.hist(placements[dim], bins=bins)
         plt.xlabel('$\Delta$' + dim + ' [$\mu$m]', fontsize=18)
-        plt.ylabel('Counts / ' + str(width) + ' $\mu$m', fontsize=18)
+        plt.ylabel('Counts / ' + sround(abs(bins[0] - bins[1])) + ' $\mu$m', fontsize=18)
         plt.xlim(-52.5, 52.5)
         plt.xticks(np.arange(-50, 55, 10))
         plt.ylim(0, 10.5)
@@ -203,10 +248,8 @@ def PlotHistogram(placements, corners, stave):
         if (corners == 'ABCD'):
             plt.ylim(0, 15.5)
 
-        mean = round(np.mean(placements[dim]),2)
-        sigma = round(np.std(placements[dim]), 2)
-        ax.annotate('$\mu$ = ' + str(mean) + ' $\mu$m',xy=(0.995,0.965),xycoords='axes fraction',fontsize=16,horizontalalignment='right',verticalalignment='bottom')
-        ax.annotate('$\sigma$ = ' + str(sigma) + ' $\mu$m',xy=(0.995,0.925),xycoords='axes fraction',fontsize=16,horizontalalignment='right',verticalalignment='bottom')
+        ax.annotate('$\mu$ = ' + sround(np.mean(placements[dim])) + ' $\mu$m',xy=(0.995,0.965),xycoords='axes fraction',fontsize=16,horizontalalignment='right',verticalalignment='bottom')
+        ax.annotate('$\sigma$ = ' + sround(np.std(placements[dim])) + ' $\mu$m',xy=(0.995,0.925),xycoords='axes fraction',fontsize=16,horizontalalignment='right',verticalalignment='bottom')
         SavePlot(RESULTS_DIR + '/' + stave, dim + '-Corners' + corners + '-histogram.pdf')
 
 # PARAMETERS #
@@ -218,7 +261,7 @@ RESULTS_DIR = '/Users/zschillaci/BNL/Working/InnerTracker/Surveys/results/'
 # Stave name (matching a sub-directory in INPUT_DIR)
 STAVE = 'ElectricalStave_8'
 # List of module numbers on the stave (corresponding to survey files in STAVE sub-directory)
-MODULES = [1, 2, 3, 4]
+MODULES = [1, 2, 3, 4, 5, 6, 7, 8]
 
 # Plot and printout all survey results, highlighting any failures (placements outside tolerance)
 for module in MODULES:
@@ -226,15 +269,16 @@ for module in MODULES:
     survey.Dump()
 
     survey.PlotXYZMovement(reference='relative', printOut=True)
-    survey.PrintTheFailures()
+    survey.PlotAngle(printOut=True)
+    survey.PrintOverview()
 
 # Plot placement histograms of all modules for specified corners
-for corners in ['AB', 'CD', 'AC', 'AD', 'BC', 'BD', 'ABCD']:
+# ['AB', 'CD', 'AC', 'AD', 'BC', 'BD', 'ABCD']
+CORNERS = 'ABCD'
+PLACEMENTS = {'X' : [], 'Y' : []}
 
-    placements = {'X' : [], 'Y' : []}
+for module in MODULES:
+    survey = TheSurvey(module, STAVE, INPUT_DIR)
+    survey.PopulateHistograms(PLACEMENTS, survey.stages[-1], CORNERS)
 
-    for module in MODULES:
-        survey = TheSurvey(module, STAVE, INPUT_DIR)
-        survey.PopulateHistograms(placements, survey.stages[-1], corners)
-
-    PlotHistogram(placements, corners, STAVE)
+PlotHistogram(PLACEMENTS, CORNERS, STAVE)

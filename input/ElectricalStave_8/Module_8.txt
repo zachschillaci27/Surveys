@@ -1,0 +1,39 @@
+[General]
+ModuleID = ""
+FiducialMark = "Mark E (Slim/17)"
+Date_Ideal = "5/9/2019 11:14:04 AM, Temperature =  "
+Notes_Ideal = ""
+Date_AfterGluing = "5/9/2019 11:55:26 AM, Temperature =  "
+Notes_AfterGluing = "Overnight curing"
+
+[CornerA]
+X_Ideal = 203.200316
+Y_Ideal = -32.836216
+Z_Ideal = 16.367763
+X_AfterGluing = 203.208935
+Y_AfterGluing = -32.835674
+Z_AfterGluing = 16.367770
+
+[CornerB]
+X_Ideal = 298.595010
+Y_Ideal = -30.392051
+Z_Ideal = 16.367763
+X_AfterGluing = 298.597306
+Y_AfterGluing = -30.388827
+Z_AfterGluing = 16.367770
+
+[CornerC]
+X_Ideal = 296.125129
+Y_Ideal = 66.006313
+Z_Ideal = 16.367763
+X_AfterGluing = 296.124295
+Y_AfterGluing = 66.002964
+Z_AfterGluing = 16.367770
+
+[CornerD]
+X_Ideal = 200.730436
+Y_Ideal = 63.562148
+Z_Ideal = 16.367763
+X_AfterGluing = 200.731973
+Y_AfterGluing = 63.554793
+Z_AfterGluing = 16.367770
