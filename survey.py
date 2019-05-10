@@ -54,7 +54,7 @@ def PlotHistogram(placements, corners, stave):
 
         ax.annotate('$\mu$ = ' + StrRound(np.mean(placements[dim])) + ' $\mu$m',xy=(0.995,0.965),xycoords='axes fraction',fontsize=16,horizontalalignment='right',verticalalignment='bottom')
         ax.annotate('$\sigma$ = ' + StrRound(np.std(placements[dim])) + ' $\mu$m',xy=(0.995,0.925),xycoords='axes fraction',fontsize=16,horizontalalignment='right',verticalalignment='bottom')
-        SavePlot(RESULTS_DIR + '/' + stave, dim + '-Corners' + corners + '-histogram.pdf')
+        SavePlot(RESULTS_DIR + stave, dim + '-Corners' + corners + '-histogram.pdf')
 
 class TheSurvey(object):
     def __init__(self, module, stave, indir):
@@ -63,7 +63,7 @@ class TheSurvey(object):
         self.stave = stave
         self.indir = indir
         self.name = 'Module_' + str(module)
-        self.infile = self.indir + '/' + self.stave + '/' + self.name + '.txt'
+        self.infile = self.indir + self.stave + '/' + self.name + '.txt'
         self.dimensions = ['X', 'Y']
         self.tolerance = 25
        
@@ -76,10 +76,12 @@ class TheSurvey(object):
         self.GetFlags()
 
     def Dump(self):
+        print('##### SURVEY RESULT #####')
         print('Module:', self.module)
         print('Stave:', self.stave)
         print('File:', self.infile)
         print('')
+        self.PrintOverview()
 
     def GetLines(self):
         infile = open(self.infile,"r")
@@ -166,14 +168,13 @@ class TheSurvey(object):
 
     def GetFlags(self):
         self.passed = True
-        self.failures = []
+        self.failures = []        
         for dim in self.dimensions:
             df = self.GetRelative(self.results[dim])
             for corner in self.corners:
-                for stage in self.stages:
-                    if (abs(df[corner][stage]) >= self.tolerance):
-                        self.passed = False
-                        self.failures.append(corner + ' - ' + stage + ': delta' + dim + ' = ' + StrRound(df[corner][stage]) + ' um')
+                if (abs(df[corner][-1]) >= self.tolerance):
+                    self.passed = False
+                    self.failures.append(corner + ': delta' + dim + ' = ' + StrRound(df[corner][-1]) + ' um')
 
     def PrintOverview(self):
         if self.passed:
@@ -182,7 +183,7 @@ class TheSurvey(object):
             print("---> Failed! The following corners are out of " + StrRound(self.tolerance) + " um tolerance: ")
             for failure in self.failures:
                 print(failure)
-        print('-----------------------------------------------------------------' + '\n')
+        print('')
 
     def PopulateHistograms(self, placements, stage, corners='ABCD'):
         for dim in self.dimensions:
@@ -217,7 +218,7 @@ class TheSurvey(object):
             plt.xticks(np.arange(len(self.stages)), self.stages)
             plt.ylabel(dim + ' ' + units)
             plt.legend(loc=9, ncol=4)
-        SavePlot(RESULTS_DIR + '/' + self.stave, 'position-' + reference + '-' + self.name + '.pdf')
+        SavePlot(RESULTS_DIR + self.stave, 'position-' + reference + '-' + self.name + '.pdf')
 
     def PlotAngle(self, reference='relative', printOut=True):
         plt.figure("Angle Movement", (10, 10))
@@ -242,7 +243,7 @@ class TheSurvey(object):
         plt.xticks(np.arange(len(self.stages)), self.stages)
         plt.ylabel('Angle ' + units)
         plt.legend(loc=9, ncol=4)
-        SavePlot(RESULTS_DIR + '/' + self.stave, 'angle-' + reference + '-' + self.name + '.pdf')
+        SavePlot(RESULTS_DIR + self.stave, 'angle-' + reference + '-' + self.name + '.pdf')
 
 # PARAMETERS #
 
@@ -255,6 +256,10 @@ STAVE = 'ElectricalStave_8'
 # List of module numbers on the stave (corresponding to survey files in STAVE sub-directory)
 MODULES = [1, 2, 3, 4, 5, 6, 7, 8]
 
+# Plot placement histograms of all modules for specified corners (e.g. ['AB', 'CD', 'AC', 'AD', 'BC', 'BD', 'ABCD'])
+CORNERS = 'ABCD'
+PLACEMENTS = {'X': [], 'Y': []}
+
 # Plot and printout all survey results, highlighting any failures (placements outside tolerance)
 for module in MODULES:
     survey = TheSurvey(module, STAVE, INPUT_DIR)
@@ -262,15 +267,8 @@ for module in MODULES:
 
     survey.PlotMovement(reference='relative', printOut=True)
     survey.PlotAngle(reference='absolute', printOut=True)
-    survey.PrintOverview()
 
-# Plot placement histograms of all modules for specified corners
-# ['AB', 'CD', 'AC', 'AD', 'BC', 'BD', 'ABCD']
-CORNERS = 'ABCD'
-PLACEMENTS = {'X' : [], 'Y' : []}
-
-for module in MODULES:
-    survey = TheSurvey(module, STAVE, INPUT_DIR)
     survey.PopulateHistograms(PLACEMENTS, survey.stages[-1], CORNERS)
 
 PlotHistogram(PLACEMENTS, CORNERS, STAVE)
+
