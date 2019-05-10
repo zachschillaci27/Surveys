@@ -54,7 +54,7 @@ def PlotHistogram(placements, corners, stave):
 
         ax.annotate('$\mu$ = ' + StrRound(np.mean(placements[dim])) + ' $\mu$m',xy=(0.995,0.965),xycoords='axes fraction',fontsize=16,horizontalalignment='right',verticalalignment='bottom')
         ax.annotate('$\sigma$ = ' + StrRound(np.std(placements[dim])) + ' $\mu$m',xy=(0.995,0.925),xycoords='axes fraction',fontsize=16,horizontalalignment='right',verticalalignment='bottom')
-        SavePlot(RESULTS_DIR + stave, dim + '-Corners' + corners + '-histogram.pdf')
+        SavePlot(RESULTS_DIR + stave, dim + '-Corners' + corners + '-histogram')
 
 class TheSurvey(object):
     def __init__(self, module, stave, indir):
@@ -212,13 +212,13 @@ class TheSurvey(object):
 
             low, high = SetYlim(plt.ylim(), plt.yticks())
             plt.ylim(low, high)
+            plt.ylim(-50.5, 50.5)
 
-            # plt.ylim(-75.5, 75.5)
             plt.xlabel('Stage in Process')
             plt.xticks(np.arange(len(self.stages)), self.stages)
             plt.ylabel(dim + ' ' + units)
             plt.legend(loc=9, ncol=4)
-        SavePlot(RESULTS_DIR + self.stave, 'position-' + reference + '-' + self.name + '.pdf')
+        SavePlot(RESULTS_DIR + self.stave, 'position-' + reference + '-' + self.name)
 
     def PlotAngle(self, reference='relative', printOut=True):
         plt.figure("Angle Movement", (10, 10))
@@ -243,7 +243,7 @@ class TheSurvey(object):
         plt.xticks(np.arange(len(self.stages)), self.stages)
         plt.ylabel('Angle ' + units)
         plt.legend(loc=9, ncol=4)
-        SavePlot(RESULTS_DIR + self.stave, 'angle-' + reference + '-' + self.name + '.pdf')
+        SavePlot(RESULTS_DIR + self.stave, 'angle-' + reference + '-' + self.name)
 
 # PARAMETERS #
 
