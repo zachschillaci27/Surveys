@@ -1,7 +1,6 @@
 #!/usr/bin/env /Users/zschillaci/Software/miniconda3/envs/pyenv/bin/python
 import os
 import sys
-import glob
 import collections
 import math as mt
 import numpy as np
@@ -9,22 +8,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime
 
-def mkdir(path):
-    if not os.path.isdir(path):
-        os.makedirs(path)
-
-def sround(val, floating=2):
+def StrRound(val, floating=2):
     return str(round(val, floating))
-
-def SavePlot(path, fname):
-    mkdir(path)
-    plt.savefig(path + '/' + fname + '.pdf')
-    plt.close()
-
-def GetFilesInDir(directory, extension='.txt'):
-    listOfFiles = glob.glob(directory + '*' + extension)
-    listOfFiles.sort()
-    return listOfFiles
 
 def StringtoFlt(string):
     flt = None
@@ -38,21 +23,38 @@ def StringtoFlt(string):
         print("Cannot convert string to float!")
     return flt
 
-def RenameStages(stages):
-    output = []
-    for stage in stages:
-        stage = stage.replace(' ', '')
-        stage = stage.lower()
-        if ('aftergluing' in stage) or ('afterglue' in stage) or ('ag' in stage):
-            stage = 'AG'
-        elif ('beforebridgeremoval' in stage) or ('bbr' in stage):
-            stage = 'BBR'
-        elif ('afterbridgeremoval' in stage) or ('abr' in stage):
-            stage = 'ABR'
-        else:
-            stage = stage.capitalize()
-        output.append(stage)
-    return output
+def SetYlim(ylim, yticks):
+    #Set y-limits of plot based upon min. and max. of plots
+    tick = abs(yticks[0][1] - yticks[0][0])
+    low = ylim[0] - 1.55 * tick
+    high = ylim[-1] + 1.55 * tick
+    return low, high
+
+def SavePlot(path, fname):
+    if not os.path.isdir(path):
+        os.makedirs(path)
+    plt.savefig(path + '/' + fname + '.pdf')
+    plt.close()
+
+def PlotHistogram(placements, corners, stave):
+    for dim in placements:
+        fig = plt.figure("Histogram - " + dim,(10,10))
+        ax = fig.add_subplot(111)
+
+        bins = np.arange(-30, 35, 7.5)
+        plt.hist(placements[dim], bins=bins)
+        plt.xlabel('$\Delta$' + dim + ' [$\mu$m]', fontsize=18)
+        plt.ylabel('Counts / ' + StrRound(abs(bins[0] - bins[1])) + ' $\mu$m', fontsize=18)
+        plt.xticks(np.arange(-50, 55, 10))
+        plt.xlim(-52.5, 52.5)
+        # plt.ylim(0, 15.5)
+
+        _, high = SetYlim(plt.ylim(), plt.yticks())
+        plt.ylim(0, high)
+
+        ax.annotate('$\mu$ = ' + StrRound(np.mean(placements[dim])) + ' $\mu$m',xy=(0.995,0.965),xycoords='axes fraction',fontsize=16,horizontalalignment='right',verticalalignment='bottom')
+        ax.annotate('$\sigma$ = ' + StrRound(np.std(placements[dim])) + ' $\mu$m',xy=(0.995,0.925),xycoords='axes fraction',fontsize=16,horizontalalignment='right',verticalalignment='bottom')
+        SavePlot(RESULTS_DIR + '/' + stave, dim + '-Corners' + corners + '-histogram.pdf')
 
 class TheSurvey(object):
     def __init__(self, module, stave, indir):
@@ -102,7 +104,23 @@ class TheSurvey(object):
         self.corners['C'] = self.lines[indC : indD - 2]
         self.corners['D'] = self.lines[indD : ]
 
-    def GetStages(self):
+    def RenameStages(self):
+        stages = []
+        for stage in self.stages:
+            stage = stage.replace(' ', '')
+            stage = stage.lower()
+            if ('aftergluing' in stage) or ('afterglue' in stage) or ('ag' in stage):
+                stage = 'AG'
+            elif ('beforebridgeremoval' in stage) or ('bbr' in stage):
+                stage = 'BBR'
+            elif ('afterbridgeremoval' in stage) or ('abr' in stage):
+                stage = 'ABR'
+            else:
+                stage = stage.capitalize()
+            stages.append(stage)
+        self.stages = stages
+
+    def GetStages(self, rename=False):
         self.stages = []
         for line in self.corners['A']:
             stage = line[line.find("_") + 1: line.find("=") - 1]
@@ -111,26 +129,24 @@ class TheSurvey(object):
         # self.stages = RenameStages(self.stages)
         return self.stages
 
-    def GetAbsolute(self, stage, corner, xyz):
-        return (self.results[stage][corner][xyz])
-
-    def GetRelative(self, stage, corner, xyz):
-        return (1000 * (self.results[stage][corner][xyz] - self.results[self.stages[0]][corner][xyz]))
-
     def GetResults(self):
-        self.results = collections.OrderedDict()
-        for ind, stage in enumerate(self.stages):
-            self.results[stage] = collections.OrderedDict()
-            for corner in self.corners.keys():
-                self.results[stage][corner] = []
-                for xyz in range(3):
-                    pos = StringtoFlt(self.corners[corner][(3 * ind) + xyz])
-                    self.results[stage][corner].append(pos)
+        xdf, ydf = collections.OrderedDict(), collections.OrderedDict()
+        for corner, coords in self.corners.items():
+            xvals, yvals = [], []
+            for i in range(len(self.stages)):
+                xvals.append(StringtoFlt(coords[(3 * i)]))
+                yvals.append(StringtoFlt(coords[(3 * i) + 1]))
+            xdf[corner] = xvals
+            ydf[corner] = yvals
+        
+        self.xdf = pd.DataFrame(xdf, index=self.stages)
+        self.ydf = pd.DataFrame(ydf, index=self.stages)
+        self.results = {'X' : self.xdf, 'Y' : self.ydf}
 
-    def GetAngle(self, stage, corners):
+    def GetAngle(self, corners, stage):
         c1, c2 = corners
-        dx = self.results[stage][c1][0] - self.results[stage][c2][0]
-        dy = self.results[stage][c1][1] - self.results[stage][c2][1]
+        dx = self.xdf[c1][stage] - self.xdf[c2][stage]
+        dy = self.ydf[c1][stage] - self.ydf[c2][stage]
         try:
             angle = 1000 * mt.atan(dy / dx)
         except:
@@ -138,119 +154,95 @@ class TheSurvey(object):
         return angle
 
     def GetAngles(self):
-        self.angles = collections.OrderedDict()
-        self.theAngles = ['AB', 'CD']
-        for stage in self.stages:
-            self.angles[stage] = collections.OrderedDict()
-            for theAngle in self.theAngles:
-                self.angles[stage][theAngle] = self.GetAngle(stage, theAngle)
+        angles = collections.OrderedDict()
+        angles['AB'] = [self.GetAngle('AB', stage) for stage in self.stages]
+        angles['CD'] = [self.GetAngle('CD', stage) for stage in self.stages]
+        self.angles = pd.DataFrame(angles, index=self.stages)
+
+    def GetRelative(self, df):
+        df = pd.DataFrame(df - df.iloc[0])
+        df = 1000 * df
+        return df
 
     def GetFlags(self):
         self.passed = True
         self.failures = []
-        for xyz, dim in enumerate(self.dimensions):
-            for corner in self.corners.keys():
+        for dim in self.dimensions:
+            df = self.GetRelative(self.results[dim])
+            for corner in self.corners:
                 for stage in self.stages:
-                    movement = self.GetRelative(stage, corner, xyz)
-                    if (abs(movement) >= self.tolerance):
+                    if (abs(df[corner][stage]) >= self.tolerance):
                         self.passed = False
-                        if (stage == self.stages[-1]):
-                            self.failures.append(corner + ' - ' + stage + ': delta' + dim + ' = ' + sround(movement) + ' um')
+                        self.failures.append(corner + ' - ' + stage + ': delta' + dim + ' = ' + StrRound(df[corner][stage]) + ' um')
 
     def PrintOverview(self):
         if self.passed:
-            print("---> Passed! All surveys within " + sround(self.tolerance) + " um tolerance.")
+            print("---> Passed! All surveys within " + StrRound(self.tolerance) + " um tolerance.")
         else:
-            print("---> Failed! The following corners are out of " + sround(self.tolerance) + " um tolerance: ")
+            print("---> Failed! The following corners are out of " + StrRound(self.tolerance) + " um tolerance: ")
             for failure in self.failures:
                 print(failure)
         print('-----------------------------------------------------------------' + '\n')
 
     def PopulateHistograms(self, placements, stage, corners='ABCD'):
-        for xyz, dim in enumerate(self.dimensions):
-            for corner in self.corners.keys():
+        for dim in self.dimensions:
+            df = self.GetRelative(self.results[dim])
+            for corner in self.corners:
                 if (corner in corners):
-                    placements[dim].append(self.GetRelative(stage, corner, xyz))
+                    placements[dim].append(df[corner][stage])
 
-    def PlotXYZMovement(self, reference='relative', printOut=True):
-        self.dframes = {}
+    def PlotMovement(self, reference='relative', printOut=True):
         plt.figure("Movement - " + reference,(10,10))
-        for xyz, dim in enumerate(self.dimensions):
-            plt.subplot(211 + xyz)
-            dframe = collections.OrderedDict()
-            for corner in self.corners.keys():
-                values = []
-                for stage in self.stages:
-                    value = None
-                    if (reference == 'relative'):
-                        value = self.GetRelative(stage, corner, xyz)
-                    else:
-                        value = self.GetAbsolute(stage, corner, xyz)
-                    values.append(value)
+        for n, dim in enumerate(self.dimensions):
+            plt.subplot(211 + n)
 
-                plt.plot(np.arange(0, len(values)), values, linestyle='--', marker='o', label=corner)
-                dframe[corner] = values
+            df = self.results[dim]
+            if (reference == 'relative'):
+                df = self.GetRelative(df)
 
-            self.dframes[dim] = dframe
+            for corner in self.corners:
+                plt.plot(np.arange(len(df[corner])), df[corner], linestyle='--', marker='o', label=corner)
 
-            units = ('[$\mu$m]' if (reference == 'relative') else ['mm'])
-
+            units = ('[$\mu$m]' if (reference == 'relative') else '[mm]')
             if printOut:
                 print('-----' + dim + ' ' + units + '-----')
-                df = pd.DataFrame(dframe, index=self.stages)
                 print(df)
                 print('--------------------' + '\n')
 
-            plt.ylim(-75.5, 75.5)
+            low, high = SetYlim(plt.ylim(), plt.yticks())
+            plt.ylim(low, high)
+
+            # plt.ylim(-75.5, 75.5)
             plt.xlabel('Stage in Process')
-            plt.xticks(np.arange(0, len(self.stages)), self.stages)
+            plt.xticks(np.arange(len(self.stages)), self.stages)
             plt.ylabel(dim + ' ' + units)
             plt.legend(loc=9, ncol=4)
         SavePlot(RESULTS_DIR + '/' + self.stave, 'position-' + reference + '-' + self.name + '.pdf')
 
-    def PlotAngle(self, printOut=True):
+    def PlotAngle(self, reference='relative', printOut=True):
         plt.figure("Angle Movement", (10, 10))
-        dframe = collections.OrderedDict()
-        for theAngle in self.theAngles:
-            values = []
-            for stage in self.stages:
-                values.append(self.angles[stage][theAngle])
 
-            plt.plot(np.arange(0, len(values)), values, linestyle='--', marker='o', label=theAngle)
-            dframe[theAngle] = values
+        df = self.angles
+        if (reference == 'relative'):
+            df = self.GetRelative(df)
+            
+        for col in self.angles.columns:
+            plt.plot(np.arange(len(df[col])), df[col], linestyle='--', marker='o', label=col)
 
+        units = ('[$\mu$rad]' if (reference == 'relative') else '[mrad]')
         if printOut:
-            print('----- Angle [mrad] -----')
-            df = pd.DataFrame(dframe, index=self.stages)
+            print('----- Angle ' + units + '-----')
             print(df)
             print('--------------------' + '\n')
 
-        plt.ylim(25, 27)
+        low, high = SetYlim(plt.ylim(), plt.yticks())
+        plt.ylim(low, high)
+
         plt.xlabel('Stage in Process')
-        plt.xticks(np.arange(0, len(self.stages)), self.stages)
-        plt.ylabel('Angle [mrad]')
+        plt.xticks(np.arange(len(self.stages)), self.stages)
+        plt.ylabel('Angle ' + units)
         plt.legend(loc=9, ncol=4)
-        SavePlot(RESULTS_DIR + '/' + self.stave, 'angle-' + self.name + '.pdf')
-
-def PlotHistogram(placements, corners, stave):
-    for dim in placements:
-        fig = plt.figure("Histogram - " + dim,(10,10))
-        ax = fig.add_subplot(111)
-
-        bins = np.arange(-30, 35, 7.5)
-        plt.hist(placements[dim], bins=bins)
-        plt.xlabel('$\Delta$' + dim + ' [$\mu$m]', fontsize=18)
-        plt.ylabel('Counts / ' + sround(abs(bins[0] - bins[1])) + ' $\mu$m', fontsize=18)
-        plt.xlim(-52.5, 52.5)
-        plt.xticks(np.arange(-50, 55, 10))
-        plt.ylim(0, 10.5)
-
-        if (corners == 'ABCD'):
-            plt.ylim(0, 15.5)
-
-        ax.annotate('$\mu$ = ' + sround(np.mean(placements[dim])) + ' $\mu$m',xy=(0.995,0.965),xycoords='axes fraction',fontsize=16,horizontalalignment='right',verticalalignment='bottom')
-        ax.annotate('$\sigma$ = ' + sround(np.std(placements[dim])) + ' $\mu$m',xy=(0.995,0.925),xycoords='axes fraction',fontsize=16,horizontalalignment='right',verticalalignment='bottom')
-        SavePlot(RESULTS_DIR + '/' + stave, dim + '-Corners' + corners + '-histogram.pdf')
+        SavePlot(RESULTS_DIR + '/' + self.stave, 'angle-' + reference + '-' + self.name + '.pdf')
 
 # PARAMETERS #
 
@@ -268,8 +260,8 @@ for module in MODULES:
     survey = TheSurvey(module, STAVE, INPUT_DIR)
     survey.Dump()
 
-    survey.PlotXYZMovement(reference='relative', printOut=True)
-    survey.PlotAngle(printOut=True)
+    survey.PlotMovement(reference='relative', printOut=True)
+    survey.PlotAngle(reference='absolute', printOut=True)
     survey.PrintOverview()
 
 # Plot placement histograms of all modules for specified corners
