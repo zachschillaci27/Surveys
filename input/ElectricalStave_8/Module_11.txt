@@ -1,0 +1,81 @@
+[General]
+ModuleID = "Test"
+FiducialMark = "Mark E (Slim/17)"
+Date_Ideal = "5/15/2019 10:20:27 AM, Temperature =  "
+Notes_Ideal = ""
+Date_AfterGluing = "5/14/2019 12:06:21 PM, Temperature =  "
+Notes_AfterGluing = ""
+Date_BeforeBridgeRemoval = "5/14/2019 5:18:14 PM, Temperature =  "
+Notes_BeforeBridgeRemoval = "6hours curing"
+Date_BeforeBridgeRemoval2 = "5/15/2019 10:01:47 AM, Temperature =  "
+Notes_BeforeBridgeRemoval2 = "next morning"
+Date_AfterBridgeRemoval = "5/15/2019 10:10:01 AM, Temperature =  "
+Notes_AfterBridgeRemoval = ""
+
+[CornerA]
+X_Ideal = -199.605033
+Y_Ideal = -33.161258
+Z_Ideal = 16.292980
+X_AfterGluing = -199.613211
+Y_AfterGluing = -33.157076
+Z_AfterGluing = 16.292957
+X_BeforeBridgeRemoval = -199.610739
+Y_BeforeBridgeRemoval = -33.161030
+Z_BeforeBridgeRemoval = 16.292957
+X_BeforeBridgeRemoval2 = -199.614219
+Y_BeforeBridgeRemoval2 = -33.164075
+Z_BeforeBridgeRemoval2 = 16.292957
+X_AfterBridgeRemoval = -199.613643
+Y_AfterBridgeRemoval = -33.168210
+Z_AfterBridgeRemoval = 16.292957
+
+[CornerB]
+X_Ideal = -104.209971
+Y_Ideal = -30.731522
+Z_Ideal = 16.292980
+X_AfterGluing = -104.212548
+Y_AfterGluing = -30.725284
+Z_AfterGluing = 16.292957
+X_BeforeBridgeRemoval = -104.211158
+Y_BeforeBridgeRemoval = -30.727090
+Z_BeforeBridgeRemoval = 16.292957
+X_BeforeBridgeRemoval2 = -104.212922
+Y_BeforeBridgeRemoval2 = -30.730408
+Z_BeforeBridgeRemoval2 = 16.292957
+X_AfterBridgeRemoval = -104.215166
+Y_AfterBridgeRemoval = -30.736261
+Z_AfterBridgeRemoval = 16.292957
+
+[CornerC]
+X_Ideal = -106.665271
+Y_Ideal = 65.667215
+Z_Ideal = 16.292980
+X_AfterGluing = -106.670480
+Y_AfterGluing = 65.662515
+Z_AfterGluing = 16.293057
+X_BeforeBridgeRemoval = -106.670417
+Y_BeforeBridgeRemoval = 65.660380
+Z_BeforeBridgeRemoval = 16.292957
+X_BeforeBridgeRemoval2 = -106.671883
+Y_BeforeBridgeRemoval2 = 65.657577
+Z_BeforeBridgeRemoval2 = 16.292957
+X_AfterBridgeRemoval = -106.669487
+Y_AfterBridgeRemoval = 65.654007
+Z_AfterBridgeRemoval = 16.292957
+
+[CornerD]
+X_Ideal = -202.060333    
+Y_Ideal = 63.237478    
+Z_Ideal = 16.292980    
+X_AfterGluing = -202.069677
+Y_AfterGluing = 63.230600
+Z_AfterGluing = 16.292957
+X_BeforeBridgeRemoval = -202.072342
+Y_BeforeBridgeRemoval = 63.225277
+Z_BeforeBridgeRemoval = 16.292957
+X_BeforeBridgeRemoval2 = -202.068728
+Y_BeforeBridgeRemoval2 = 63.223984
+Z_BeforeBridgeRemoval2 = 16.292957
+X_AfterBridgeRemoval = -202.070431
+Y_AfterBridgeRemoval = 63.223267
+Z_AfterBridgeRemoval = 16.292957

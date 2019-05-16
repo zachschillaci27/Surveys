@@ -1,0 +1,67 @@
+[General]
+ModuleID = "Test"
+FiducialMark = "Mark E (Slim/17)"
+Date_Ideal = "5/15/2019 10:20:27 AM, Temperature =  "
+Notes_Ideal = ""
+Date_AfterGluing = "5/13/2019 3:42:57 PM, Temperature =  "
+Notes_AfterGluing = "Type your note here...."
+Date_BeforeBridgeRemoval = "5/14/2019 10:09:25 AM, Temperature =  "
+Notes_BeforeBridgeRemoval = "First double loading, overnight cure"
+Date_AfterBridgeRemoval = "5/14/2019 10:22:08 AM, Temperature =  "
+Notes_AfterBridgeRemoval = "First double loading, overnight cure"
+
+[CornerA]
+X_Ideal = -101.605047
+Y_Ideal = -33.213713
+Z_Ideal = 16.292980
+X_AfterGluing = -101.600244
+Y_AfterGluing = -33.233359
+Z_AfterGluing = 16.292957
+X_BeforeBridgeRemoval = -101.602708
+Y_BeforeBridgeRemoval = -33.247298
+Z_BeforeBridgeRemoval = 16.292957
+X_AfterBridgeRemoval = -101.606910
+Y_AfterBridgeRemoval = -33.255347
+Z_AfterBridgeRemoval = 16.292957
+
+[CornerB]
+X_Ideal = -6.209985
+Y_Ideal = -30.783977
+Z_Ideal = 16.292980
+X_AfterGluing = -6.209385
+Y_AfterGluing = -30.794128
+Z_AfterGluing = 16.292957
+X_BeforeBridgeRemoval = -6.208325
+Y_BeforeBridgeRemoval = -30.808316
+Z_BeforeBridgeRemoval = 16.292957
+X_AfterBridgeRemoval = -6.211401
+Y_AfterBridgeRemoval = -30.818128
+Z_AfterBridgeRemoval = 16.292957
+
+[CornerC]
+X_Ideal = -8.665285
+Y_Ideal = 65.614760
+Z_Ideal = 16.292980
+X_AfterGluing = -8.671299
+Y_AfterGluing = 65.589080
+Z_AfterGluing = 16.292957
+X_BeforeBridgeRemoval = -8.672953
+Y_BeforeBridgeRemoval = 65.578709
+Z_BeforeBridgeRemoval = 16.292957
+X_AfterBridgeRemoval = -8.676268
+Y_AfterBridgeRemoval = 65.571609
+Z_AfterBridgeRemoval = 16.292957
+
+[CornerD]
+X_Ideal = -104.060347    
+Y_Ideal = 63.185024    
+Z_Ideal = 16.292980    
+X_AfterGluing = -104.065235
+Y_AfterGluing = 63.150845
+Z_AfterGluing = 16.292957
+X_BeforeBridgeRemoval = -104.066638
+Y_BeforeBridgeRemoval = 63.140943
+Z_BeforeBridgeRemoval = 16.292857
+X_AfterBridgeRemoval = -104.073142
+Y_AfterBridgeRemoval = 63.134927
+Z_AfterBridgeRemoval = 16.292857

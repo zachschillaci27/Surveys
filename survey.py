@@ -254,7 +254,7 @@ RESULTS_DIR = '/Users/zschillaci/BNL/Working/InnerTracker/Surveys/results/'
 # Stave name (matching a sub-directory in INPUT_DIR)
 STAVE = 'ElectricalStave_8'
 # List of module numbers on the stave (corresponding to survey files in STAVE sub-directory)
-MODULES = [1, 2, 3, 4, 5, 6, 7, 8]
+MODULES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
 
 # Plot placement histograms of all modules for specified corners (e.g. ['AB', 'CD', 'AC', 'AD', 'BC', 'BD', 'ABCD'])
 CORNERS = 'ABCD'
